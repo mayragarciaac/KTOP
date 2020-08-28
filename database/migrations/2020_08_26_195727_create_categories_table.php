@@ -10,14 +10,24 @@ class CreateCategoriesTable extends Migration
      * Run the migrations.
      *
      * @return void
+     * 
      */
+    /*
+     $table->integer('id')->unsigned();
+            $table->string('name',50);
+            $table->integer('father')->unsigned();
+            $table->integer('type')->unsigned();
+            $table->string('value',200);
+            $table->integer('level')->unsigned();
+            $table->primary(array('id'));
+    */
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->integer('id')->unsigned();
             $table->string('name',50);
+            $table->integer('father')->unsigned();
             $table->integer('type')->unsigned();
-            $table->string('value',200);
             $table->integer('level')->unsigned();
             $table->primary(array('id'));
         });

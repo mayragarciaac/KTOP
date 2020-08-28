@@ -1,19 +1,31 @@
 
 
- <!-- Compiled and minified CSS -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
- <!-- Compiled and minified JavaScript -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ @include('cabecera');
 
 
-
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">KTOP</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="productos">Productos</a></li>
-        <li><a href="logout">Logout</a></li>
-      </ul>
+  <body>
+    <div class="container">
+       @if (count($category_list) > 0)
+        <div class="row">
+              @foreach($category_list as $category)
+                  <div class="col s6 m6">
+                    <div class="card  red lighten-5">
+                      <div class="card-content white-text">
+                        <span class="card-title red-text">{{ $category['name'] }}</span>
+                        <p class=" red-text">Info Categoty</p>
+                      </div>
+                      <div class="card-action">
+                        <a href="/category_list/{{ $category['id'] }}">Acceder</a>
+                      </div>
+                    </div>
+                  </div>
+              @endforeach
+          </div>
+          @endif
     </div>
-  </nav>
+  </body>
+  
+  
+     
+  
+  

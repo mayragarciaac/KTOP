@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,10 +13,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('login','LoginController');
+Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@index']);
+//Front 1 Administracion
 
-Route::get('logout', '\App\Http\Controllers\LoginController@logout');
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => 'auth_session'], function () {
+    Route::get('booking_products/{Id}', 'ProductosController@booking');
+    Route::get('create_product/{Id}', 'ProductosController@form_data');
+    Route::get('show_product/{IdProducto}', 'ProductosController@show');
+    Route::post('/save_productform', 'ProductosController@store');
+    Route::get('logout', 'LoginController@logout');
+    Route::get('category_list/{Id}', 'CategoryListController@show');
+    Route::resource('category_list', 'CategoryListController');
 });
+
+//Front 2
+Route::get('/', 'CategoryListController@front_users');
+Route::get('/category_products/{Id}', 'CategoryListController@front_users_category_products');
+Route::get('/products/{Id}', 'ProductosController@front_products');
+Route::post('/create_reserva', 'ProductosController@store_reserva');
+Route::get('/resultado_reserva/{Id}', 'ProductosController@show_reserva');
+
+
 

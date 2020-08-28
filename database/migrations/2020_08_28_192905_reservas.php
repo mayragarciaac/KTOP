@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryListsTable extends Migration
+class Reservas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateCategoryListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('category_lists', function (Blueprint $table) {
-            //$table->integer('id')->unsigned();
+        Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50);
+            $table->integer('idProducto')->nullable(false);
+            $table->string('idReserva',200);
+            $table->string('name',200)->default("");
+            $table->string('lastname',200)->default("");
+            $table->string('email',200);
             $table->unique(array('id'));
         });
-        //DB::statement('ALTER TABLE categories MODIFY id INTEGER NOT NULL AUTO_INCREMENT');
     }
 
     /**
@@ -29,6 +31,6 @@ class CreateCategoryListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_lists');
+        Schema::dropIfExists('reservas');
     }
 }
