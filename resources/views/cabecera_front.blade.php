@@ -9,6 +9,7 @@
 <nav>
    <div class="nav-wrapper container">
      <a href="/" class="brand-logo center">KTOP</a>
+     <a href="/login" class=" right">Log in</a>
    </div>
  </nav>
 
