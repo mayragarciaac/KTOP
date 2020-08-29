@@ -17,7 +17,6 @@ Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@index']);
 //Front 1 Administracion
 
 Route::group(['middleware' => 'auth_session'], function () {
-    Route::get('booking_products/{Id}', 'ProductosController@booking');
     Route::get('create_product/{Id}', 'ProductosController@form_data');
     Route::get('show_product/{IdProducto}', 'ProductosController@show');
     Route::post('/save_productform', 'ProductosController@store');
@@ -32,6 +31,8 @@ Route::get('/category_products/{Id}', 'CategoryListController@front_users_catego
 Route::get('/products/{Id}', 'ProductosController@front_products');
 Route::post('/create_reserva', 'ProductosController@store_reserva');
 Route::get('/resultado_reserva/{Id}', 'ProductosController@show_reserva');
+
+Route::get('booking_products/{Id}', 'ProductosController@booking');
 
 
 
