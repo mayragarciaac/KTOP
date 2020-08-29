@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('login','LoginController');
-Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@index']);
+Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@store']);
 //Front 1 Administracion
 
 Route::group(['middleware' => 'auth_session'], function () {
