@@ -38,7 +38,7 @@ class LoginController extends Controller
         $user = User::where([['email', $request['user']]])->first();
         
         if (!Hash::check( $request['password'],$user['password'])) 
-            return view('login')->with('errors',array("Error en el usuario o la contraseña"));
+            return view('/')->with('errors',array("Error en el usuario o la contraseña"));
         Session::put('user_id', $user->id);
         
         return redirect('/category_list');
