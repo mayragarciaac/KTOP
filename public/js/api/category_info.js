@@ -10,7 +10,7 @@ var data = JSON.stringify({
 });
 var config = {
     method: 'post',
-    url: 'http://localhost:8000/api/category_info2/' + element,
+    url: 'http://http://165.232.110.31//api/category_info2/' + element,
     headers: {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/x-www-form-urlencoded',

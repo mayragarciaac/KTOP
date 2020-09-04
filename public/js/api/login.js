@@ -4,7 +4,7 @@
 const form = document.querySelector('form');
 
 const LoginUser = (user) => {
-    axios.post('http://localhost:8000/api/login', {
+    axios.post('http://http://165.232.110.31//api/login', {
             data: {
                 email: user.email,
                 password: user.password
