@@ -11,7 +11,7 @@ var data = JSON.stringify({
 });
 var config = {
     method: 'post',
-    url: 'http://http://165.232.110.31//api/create_product_form_info/' + element,
+    url: 'http://165.232.110.31/api/create_product_form_info/' + element,
     headers: {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -108,7 +108,7 @@ function store_product() {
         });
         var config = {
             method: 'post',
-            url: 'http://http://165.232.110.31//api/create_product2/',
+            url: 'http://165.232.110.31/api/create_product2/',
             headers: {
                 'Authorization': 'Bearer ' + token,
                 'Content-Type': 'application/x-www-form-urlencoded',

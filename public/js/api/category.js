@@ -8,7 +8,7 @@ var data = JSON.stringify({
 });
 var config = {
     method: 'post',
-    url: 'http://http://165.232.110.31//api/category_list2',
+    url: 'http://165.232.110.31/api/category_list2',
     headers: {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/x-www-form-urlencoded',
