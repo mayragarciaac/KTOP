@@ -81,6 +81,50 @@ class ProductosController extends Controller
         
     }
 
+    public function store_api(Request $request)
+    {
+        
+        $request =  json_decode($request->getContent(), true);
+        $request = $request['producto'];
+        $request =  json_decode($request, true);
+        //return $request;
+        $data = array(
+            'name'          => $request['name'],
+            'sku'           => rand(1111111,9999999),
+            'brand'         => bin2hex(random_bytes(20)),
+            'model'         => $request['model'],
+            'description'   => $request['description'],
+            'stockUnits'    => $request['stockUnits'],
+            'category'      => $request['categoriaId'] 
+        );
+        $result = productos::create($data);
+        if(!empty($result) && ctype_digit("".$result['id'])){
+
+            $categories = categories::where('father',$request['categoriaId'] )->get();
+            if(sizeof($categories)>0){
+                foreach ($categories as $key => $value) {
+                    if(isset($request['additional_info_'.$value['id']])){
+                        $value_Info = $request['additional_info_'.$value['id']];
+                        if($value['type'] == 2)
+                            $value_Info = 1;
+                        productos_additional_properties::create(array(
+                            'value'         => $value_Info,
+                            'idPropertie'   => $value['id'],
+                            'idProducto'    => $result['id']
+                        ));
+                    }
+                }
+            }
+
+
+            return $result['id'];
+        }
+            
+        
+        return false;
+        
+    }
+
     public function randomId(){
 
         $id = Str::random(10);
@@ -137,6 +181,25 @@ class ProductosController extends Controller
         return redirect('category_list');
     }
 
+    public function form_info($category)
+    {
+        $info = category_list::where('id', $category)->first();
+        if(!empty($info)){
+            $Properties = categories::where('father', $category)->get();
+            $data = ['category'=>$info,'Properties'=>$Properties];
+            return $data;
+        }
+    }
+
+    public function form_data_view($category)
+    {
+        return view('createProducts2');
+    }
+    public function product_view($category)
+    {
+        return view('productoDetails2');
+    }
+
 
     /**
      * Display the specified resource.
@@ -162,6 +225,24 @@ class ProductosController extends Controller
 
         return redirect('category_list');
     }
+
+    public function show_api($id)
+    {
+        $Producto = productos::where('idProducto', $id)->first();
+
+        if(!empty($Producto)){
+            $category = category_list::where('id', $Producto['category'])->first();
+            $product_data_extended = productos::product_data_extended($Producto['category'],$id);
+            if(!empty($product_data_extended))
+                $Producto['product_data_extended'] = $product_data_extended;
+            if(!empty($category))
+                $Producto['categoryname'] = $category['name'];
+
+            return $Producto;
+        }
+    }
+
+
     public function front_products($id)
     {
         $Producto = productos::where('idProducto', $id)->first();

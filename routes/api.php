@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
+
 Route::group(['middleware' => 'auth:api'], function(){
-    Route::post('details', 'API\UserController@details');
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+    Route::post('category_list2', 'CategoryListController@index_api');
+    Route::post('category_info2/{Id}', 'CategoryListController@show_api');
+    Route::post('create_product2', 'ProductosController@store_api');
+    Route::post('create_product_form_info/{Id}', 'ProductosController@form_info');
+    Route::post('show_product2/{Id}', 'ProductosController@show_api');
 });

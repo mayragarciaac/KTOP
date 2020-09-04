@@ -14,11 +14,32 @@ class CategoryListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index()//request $request)
     {
+        //return $request;
         $category = category_list::all();
         return view('admin_index')->with('category_list',$category);
     }
+
+    public function index_api()//request $request)
+    {
+        //return $request;
+        $category = category_list::all();
+        return $category;
+    }
+
+    public function basic_api()
+    {
+        return view('category_list2');
+    }
+
+    public function show_api_view()
+    {
+        return view('category_info2');
+    }
+
+
+
     public function front_users()
     {
         $category = category_list::all();
@@ -77,6 +98,24 @@ class CategoryListController extends Controller
             
         
         return redirect('category_list');
+    }
+
+    public function show_api($id)
+    {
+       
+        $category = category_list::where('id', $id)->first();
+        
+        if(!empty($category)){
+            $Properties = categories::where('father', $id)->get();
+            $products = productos::where('category', $id)->get();
+
+            $data = [
+                'category_list' => $category,
+                'properties' => $Properties,
+                'products' => $products
+            ];
+            return $data;
+        }
     }
 
     /**

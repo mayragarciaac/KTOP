@@ -12,10 +12,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::resource('login','LoginController');
 Route::post('login', [ 'as' => 'login', 'uses' => 'LoginController@store']);
-//Front 1 Administracion
 
+//vistas de la api --
+Route::get('category_list2', 'CategoryListController@basic_api');
+Route::get('category_info2/{Id}', 'CategoryListController@show_api_view');
+Route::get('create_product2/{Id}', 'ProductosController@form_data_view');
+Route::get('show_product2/{Id}', 'ProductosController@product_view');
+
+
+//Front 1 Administracion
 Route::group(['middleware' => 'auth_session'], function () {
     Route::get('create_product/{Id}', 'ProductosController@form_data');
     Route::get('show_product/{IdProducto}', 'ProductosController@show');
@@ -25,7 +33,7 @@ Route::group(['middleware' => 'auth_session'], function () {
     Route::resource('category_list', 'CategoryListController');
 });
 
-//Front 2
+//Front 2 --
 Route::get('/', 'CategoryListController@front_users');
 Route::get('/category_products/{Id}', 'CategoryListController@front_users_category_products');
 Route::get('/products/{Id}', 'ProductosController@front_products');
