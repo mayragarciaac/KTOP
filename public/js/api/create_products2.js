@@ -120,8 +120,8 @@ function store_product() {
 
         axios(config)
             .then(function(response) {
-                /*if (response.data != false)
-                    window.location.href = '/show_product2/' + response.data;*/
+                if (response.data != false)
+                    window.location.href = '/show_product2/' + response.data;
                 console.log(response);
 
             }).catch(function(error) {
