@@ -15,8 +15,8 @@ class UserController extends Controller
      */ 
     public function login(Request $request){ 
         $credentials = [
-            'email' => $request['email'],
-            'password' => $request['password'],
+            'email' => $request['data']['email'],
+            'password' => $request['data']['password'],
         ];
         if (Auth::attempt($credentials)){ 
             $user = Auth::user(); 
@@ -24,7 +24,7 @@ class UserController extends Controller
             return response()->json(['success' => $success], $this-> successStatus); 
         } 
         else{ 
-            return response()->json(['error'=>"No credentials"], 401); 
+            return response()->json(['error'=>$credentials], 401); 
         } 
     }
     /** 
